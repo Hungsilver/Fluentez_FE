@@ -1,0 +1,19 @@
+$green-custom: #1a7e48;
+$blue-custom: #3458a1;
+$green-gray :#dcf6cb;
+$gray-item :#9aabab47;
+$gray-bg :#f6f7fb;
+
+
+// Thêm các màu tùy chỉnh vào $theme-colors map
+// Điều này cho phép Bootstrap tạo ra các class như .bg-green-custom
+$theme-colors: map-merge(
+  $theme-colors,
+  (
+    "green-custom": $green-custom,
+    "blue-custom": $blue-custom,
+    "green-gray": $green-gray,
+    "gray-item": $gray-item,
+    "gray-bg": $gray-bg,
+  )
+);

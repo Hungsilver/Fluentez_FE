@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+//import variables custom
+@import "./styles/variables";
+
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "bootstrap/scss/utilities/api";
+
+@import "bootstrap/scss/root"; // xóa nếu xung đột với ant design và tự phải khai báo biến như rouded-*
+
+a {
+  text-decoration: none;
+  color: inherit;
+  :hover {
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span {
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}

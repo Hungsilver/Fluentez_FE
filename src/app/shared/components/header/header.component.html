@@ -1,0 +1,46 @@
+<nz-header>
+      <div class="app-header d-flex justify-content-between">
+        <div>
+          <div class="logo-header">
+            <img src="/assets/images/Fluentez_text.png" alt="logo-fluentez" />
+          </div>
+        </div>
+        <div>
+          <nz-input-group [nzPrefix]="prefixTemplateUser">
+            <input
+              class=""
+              type="text"
+              nz-input
+              placeholder="Tìm kiếm khóa học, từ vựng,..."
+            />
+          </nz-input-group>
+          <ng-template #prefixTemplateUser>
+            <span nz-icon nzType="search" nzTheme="outline"></span>
+          </ng-template>
+        </div>
+        <div>
+          <nz-avatar
+            nzIcon="user"
+            nzSrc=""
+            nz-dropdown
+            [nzDropdownMenu]="menuProfile"
+          >
+            <nz-dropdown-menu #menuProfile="nzDropdownMenu">
+              <div class="p-4 shadow bg-white rounded">
+                <div>
+                  <nz-avatar nzIcon="user" nzSrc=""></nz-avatar>
+                  <span>{{userLogin?.email ?? 'Anonymous'}}</span>
+                </div>
+                <nz-divider></nz-divider>
+                <div *ngIf="!userLogin;else logout">
+                  <a routerLink="login">Đăng nhập</a>
+                </div>
+                <ng-template #logout>
+                  <button type="button" (click)="onLogOut()" class="btn">Đăng xuất</button>
+                </ng-template>
+              </div>
+            </nz-dropdown-menu>
+          </nz-avatar>
+        </div>
+      </div>
+    </nz-header>

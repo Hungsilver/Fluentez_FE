@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { GrammarModule } from './grammar/grammar.module';
 import { RouterModule } from '@angular/router';
-import { GRAMMAR_ROUTES } from './grammar/grammar-routing.module';
+import { FEATURE_ROUTES } from './features-routing.module';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(GRAMMAR_ROUTES),
-    GrammarModule
+    RouterModule.forChild(FEATURE_ROUTES),
   ],
   declarations: [
   ]

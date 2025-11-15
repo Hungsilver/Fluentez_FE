@@ -1,0 +1,194 @@
+<div class="">
+  <div nz-row [nzGutter]="[12, 12]">
+    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="12" nzXl="12">
+      <div
+        class="position-relative w-100 rounded-4 overflow-hidden"
+        style="height: 13rem"
+      >
+        <video
+          class="position-absolute w-100 h-100 object-fit-cover"
+          src="https://media.fluentez.com/uploads/UserProfiles/christmas_home.mp4"
+          autoplay
+          loop
+        ></video>
+      </div>
+    </div>
+    <div nz-col nzXs="24" nzSm="24" nzMd="8" nzLg="8" nzXl="8">
+      <div class="position-relative h-100 w-100">
+        <div
+          class="rounded-4 d-flex flex-column position-relative h-100 px-2 py-3 overflow-hidden bg-green-gray"
+        >
+          <h1>My Process</h1>
+          <div class="d-flex column-gap-3">
+            <div>
+              <h6>Today</h6>
+              <p>0 minutes</p>
+            </div>
+            <div>
+              <h6>This month</h6>
+              <p>0 minutes</p>
+            </div>
+          </div>
+          <div class="mt-auto">
+            <button class="btn-view-detail">View details</button>
+          </div>
+        </div>
+        <img
+          class="position-absolute opacity-75"
+          style="width: 7rem; bottom: 0px; right: -18px"
+          src="assets/images/sakura_3.png"
+          loading="lazy"
+          alt="sakura"
+        />
+      </div>
+    </div>
+    <div class="db-hidden" nz-col nzLg="4" nzXl="4">
+      <div
+        class="d-flex justify-content-center align-items-center position-relative rounded-1 overflow-hidden h-100 w-100 shadow"
+      >
+        <p>Chat with AI</p>
+        <img
+          class="position-absolute opacity-75"
+          style="width: 7rem; top: -3px; right: -3px"
+          src="assets/images/lunar_lottie_gif_optimize.gif"
+          loading="lazy"
+          alt="sakura"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div nz-row [nzGutter]="12" class="my-3">
+    <div nz-col class="" nzXs="24" nzSm="24" nzLg="18">
+      <div nz-row nzGutter="12">
+        <div nz-col nzXs="24" nzSm="24" nzLg="16" class="flex h-100">
+          <h2>Top Features</h2>
+          <div class="feature">
+            <a routerLink="/grammar" class="feature-item">
+              <img
+                class="w-100"
+                src="assets/images/grammar.webp"
+                loading="lazy"
+                alt="grammar"
+              />
+              <p>Grammar</p>
+            </a>
+            <a routerLink="/grammar" class="feature-item">
+              <img
+                class="w-100"
+                src="assets/images/listening.webp"
+                loading="lazy"
+                alt="Listening"
+              />
+              <p>Listening</p>
+            </a>
+            <a routerLink="/grammar" class="feature-item">
+              <img
+                class="w-100"
+                src="assets/images/reading.webp"
+                loading="lazy"
+                alt="reading"
+              />
+              <p>Reading</p>
+            </a>
+            <a routerLink="/grammar" class="feature-item">
+              <img
+                class="w-100"
+                src="assets/images/writing.webp"
+                loading="lazy"
+                alt="writing"
+              />
+              <p>Writing</p>
+            </a>
+          </div>
+        </div>
+        <div nz-col nzXs="24" nzSm="24" nzLg="8">
+          <h2>Deal</h2>
+          <div class="deal">
+            <p>Trải nghiệm tất cả tính năng</p>
+            <p>Chỉ với 20.000đ</p>
+            <button type="button" class="deal-btn">Buy now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div nz-col class="" nzXs="24" nzSm="24" nzLg="6">
+      <div class="d-flex flex-column gap-3">
+        <div class="d-flex justify-content-between">
+          <h2>Top Users</h2>
+          <button class="btn-view-detail">See All</button>
+        </div>
+
+        <div class="top-users">
+          <ul>
+            <li>
+              <a routerLink="profiles/hihi">Nguyễn văn A</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-gray-bg rounded-1 p-2">
+    <div nz-row>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8" class="">
+        <div class="d-flex">
+          <div class="footer-logo">
+            <img
+              class="w-100 h-auto object-fit-cover"
+              src="assets/images/Fluentez_img.png"
+              alt="logo"
+            />
+          </div>
+          <h4 class="h-auto">About Fluentez</h4>
+        </div>
+        <div>
+          <p>
+            <strong>Phone:</strong><span> 058152382</span>
+          </p>
+          <p>
+            <strong>Email:</strong><span> Hungsilvertq&#64;gmail.com</span>
+          </p>
+        </div>
+        
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" class="footer-item">
+        <h4>COMPANY</h4>
+        <ul>
+          <li><a routerLink="">About us</a></li>
+          <li><a routerLink="">Blog</a></li>
+          <li><a routerLink="">Careers</a></li>
+          <li><a routerLink="">Contact us</a></li>
+        </ul>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" class="footer-item">
+        <h4>COURSES</h4>
+        <ul>
+          <li><a routerLink="">About us</a></li>
+          <li><a routerLink="">Blog</a></li>
+          <li><a routerLink="">Careers</a></li>
+          <li><a routerLink="">Contact us</a></li>
+        </ul>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" class="footer-item">
+        <h4>SHORT LINK</h4>
+        <ul>
+          <li><a routerLink="">About us</a></li>
+          <li><a routerLink="">Blog</a></li>
+          <li><a routerLink="">Careers</a></li>
+          <li><a routerLink="">Contact us</a></li>
+        </ul>
+      </div>
+      <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="4" class="footer-item">
+        <h4>LISTEN & TYPE</h4>
+        <ul>
+          <li><a routerLink="">About us</a></li>
+          <li><a routerLink="">Blog</a></li>
+          <li><a routerLink="">Careers</a></li>
+          <li><a routerLink="">Contact us</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</div>

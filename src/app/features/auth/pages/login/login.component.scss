@@ -1,0 +1,24 @@
+.login-btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 60px;
+  background-color: transparent;
+  border: 1px solid #e2e8f0;
+  opacity: 1;
+}
+.forgot-pass {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+::ng-deep .ant-divider-horizontal.ant-divider-with-text {
+  margin: 8px 0;
+}
+
+::ng-deep .ant-divider-horizontal.ant-divider-with-text {
+  margin: 8px 0;
+}
+
+::ng-deep .ant-row {
+  margin: 8px 0;
+}

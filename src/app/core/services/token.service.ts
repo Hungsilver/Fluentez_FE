@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
+import { CookieService } from 'ngx-cookie-service';
 
-interface JwtPayload {
-  nameid: string;           // User ID
-  unique_name: string;      // Username
-  email: string;
-  FullName: string;
-  role: string[];           // Roles
-  permission: string[];     // Permissions
-  exp: number;              // Expiration
-  iat: number;              // Issued at
-}
+// interface JwtPayload {
+//   idUser: string;          
+//   userName: string;    
+//   displayName: string;
+//   email: string;
+//   phoneNumber:string;
+//   roleCodes: string;           
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -19,67 +18,79 @@ export class TokenService {
   private readonly ACCESS_TOKEN_KEY = 'access_token';
   private readonly REFRESH_TOKEN_KEY = 'refresh_token';
 
+  constructor(private cookieService: CookieService) { 
+
+  }
   // Save tokens
-  setTokens(accessToken: string, refreshToken: string): void {
-    localStorage.setItem(this.ACCESS_TOKEN_KEY, accessToken);
-    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+  // setTokens(accessToken: string, refreshToken: string): void {
+  //   localStorage.setItem(this.ACCESS_TOKEN_KEY, accessToken);
+  //   localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
+  // }
+
+  setAccessToken(token :string , expiresDate?: string): void {
+    const expiredDate = new Date(expiresDate ?? Date.now() + 60 * 60 * 1000);
+    this.cookieService.set(this.ACCESS_TOKEN_KEY, token, {
+      expires: expiredDate,
+      path: '/',
+      // secure: true, // Chỉ gửi qua HTTPS
+      // sameSite: 'Strict', // Bảo vệ CSRF
+    });
+  }
+
+  setRefreshToken(token: string, expiresDate?: string): void {
+    const expiredDate = new Date(expiresDate ?? Date.now() + 7 * 24 * 60 * 60 * 1000);
+    this.cookieService.set(this.REFRESH_TOKEN_KEY, token, {
+      expires: expiredDate,
+      path: '/',
+      // secure: true, // Chỉ gửi qua HTTPS
+      // sameSite: 'Strict', // Bảo vệ CSRF
+    });
   }
 
   // Get access token
   getAccessToken(): string | null {
-    return localStorage.getItem(this.ACCESS_TOKEN_KEY);
+    return this.cookieService.get(this.ACCESS_TOKEN_KEY) || null;
   }
 
   // Get refresh token
   getRefreshToken(): string | null {
-    return localStorage.getItem(this.REFRESH_TOKEN_KEY);
+    return this.cookieService.get(this.REFRESH_TOKEN_KEY) || null;
   }
 
-  // Clear tokens
+  /**
+   * Kiểm tra xem có token không
+   */
+  hasToken(): boolean {
+    return this.cookieService.check(this.ACCESS_TOKEN_KEY);
+  }
+
+  /**
+   * Xóa access token
+   */
+  removeToken(): void {
+    this.cookieService.delete(this.ACCESS_TOKEN_KEY, '/');
+  }
+
+  /**
+   * Xóa refresh token
+   */
+  removeRefreshToken(): void {
+    this.cookieService.delete(this.REFRESH_TOKEN_KEY, '/');
+  }
+
+  /**
+   * Xóa tất cả tokens (logout)
+   */
   clearTokens(): void {
-    localStorage.removeItem(this.ACCESS_TOKEN_KEY);
-    localStorage.removeItem(this.REFRESH_TOKEN_KEY);
+    this.removeToken();
+    this.removeRefreshToken();
   }
 
-  // Decode JWT token
-  decodeToken(token: string) {
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-
-      return {
-        id: parseInt(decoded.nameid),
-        username: decoded.unique_name,
-        email: decoded.email,
-        fullName: decoded.FullName,
-        roles: Array.isArray(decoded.role) ? decoded.role : [decoded.role],
-        permissions: Array.isArray(decoded.permission) 
-          ? decoded.permission 
-          : [decoded.permission]
-      };
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  }
-
-  // Check if token is expired
-  isTokenExpired(token: string): boolean {
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-      const expirationDate = new Date(decoded.exp * 1000);
-      return expirationDate < new Date();
-    } catch {
-      return true;
-    }
-  }
-
-  // Get token expiration date
-  getTokenExpirationDate(token: string): Date | null {
-    try {
-      const decoded = jwtDecode<JwtPayload>(token);
-      return new Date(decoded.exp * 1000);
-    } catch {
-      return null;
-    }
+  /**
+   * Lưu cả hai tokens cùng lúc
+   */
+  setTokens(token: string, refreshToken: string, tokenExpires?: string): void {
+    this.setAccessToken(token, tokenExpires);
+    this.setRefreshToken(refreshToken, tokenExpires);
   }
 }

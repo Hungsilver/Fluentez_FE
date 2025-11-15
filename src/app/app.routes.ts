@@ -13,7 +13,11 @@ export const routes: Routes = [
     component: MainLayoutComponent,
     loadChildren: () => import('@features').then((m) => m.FeaturesModule),
   },
-
+  {
+    path: 'login',
+    pathMatch: 'full',
+    redirectTo: 'auth/login',
+  },
   {
     path: 'auth',
     component: AuthLayoutComponent,
