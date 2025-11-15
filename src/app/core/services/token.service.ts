@@ -91,6 +91,6 @@ export class TokenService {
    */
   setTokens(token: string, refreshToken: string, tokenExpires?: string): void {
     this.setAccessToken(token, tokenExpires);
-    this.setRefreshToken(refreshToken, tokenExpires);
+    this.setRefreshToken(refreshToken);
   }
 }

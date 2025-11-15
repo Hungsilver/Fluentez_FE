@@ -6,6 +6,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { AntCommonModule } from '@shared/module/common/ant-common.module';
 import { AuthService } from '@core';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -21,14 +22,18 @@ import { AuthService } from '@core';
     AntCommonModule,
   ],
 })
-export class HeaderComponent implements OnInit {
-  userLogin: any = {};
-
+export class HeaderComponent implements OnInit{
+  userLogin!: any;
   constructor(private authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.currentUser$.subscribe(res=>{
+      this.userLogin = res
+    }
+    );
+  }
 
-  onLogOut(){
+  onLogOut() {
     this.authService.logout();
   }
 }
