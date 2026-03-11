@@ -1,0 +1,86 @@
+<div class="fill-in-blank-container">
+  <!-- Compact Header -->
+  <div class="exercise-header">
+    <div class="header-content">
+      <h3 class="exercise-title">Điền vào chỗ trống</h3>
+      <div class="progress-info" *ngIf="data?.length">
+        <span class="progress-text">{{ getAnsweredCount() }}/{{ data.length }} câu đã trả lời</span>
+        <div class="progress-bar">
+          <div class="progress-fill" [style.width.%]="(getAnsweredCount() / data.length) * 100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Questions List -->
+  <div class="questions-wrapper">
+    <div 
+      *ngFor="let q of data; let i = index" 
+      class="question-item"
+      [class.submitted]="isSubmitted"
+      [class.correct]="isSubmitted && q.isCorrect"
+      [class.incorrect]="isSubmitted && q.isCorrect === false"
+      [class.has-answer]="q.userAnswer?.trim()">
+      <!-- Inline Question Number & Content -->
+      <div class="question-row">
+        <span class="question-number">{{ i + 1 }}.</span>
+        <div class="sentence-wrapper">
+          <ng-container *ngFor="let word of q.description.split(' '); let wordIndex = index">
+            <span 
+              *ngIf="!word.includes('___')" 
+              class="word-text">
+              {{ word }}<span *ngIf="wordIndex < q.description.split(' ').length - 1"> </span>
+            </span>
+            <div 
+              *ngIf="word.includes('___')" 
+              class="blank-wrapper"
+              [class.focused]="focusedInputIndex === i"
+              [class.has-error]="isSubmitted && !q.userAnswer">
+              <input 
+                class="input-blank" 
+                nz-input 
+                [(ngModel)]="q.userAnswer"
+                [disabled]="isSubmitted"
+                placeholder="..."
+                (focus)="onInputFocus($event, i)"
+                (blur)="onInputBlur($event, i)"
+                (input)="onInputChange()"
+              />
+            </div>
+          </ng-container>
+        </div>
+        <!-- Compact Result Badge -->
+        <div *ngIf="isSubmitted" class="result-badge">
+          <span *ngIf="q.isCorrect" class="badge-correct">✓</span>
+          <span *ngIf="q.isCorrect === false" class="badge-incorrect">✗</span>
+        </div>
+      </div>
+
+      <!-- Compact Explanation -->
+      <div *ngIf="isSubmitted && q.explanation" class="explanation-compact">
+        <span class="explanation-text">{{ q.explanation }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compact Action Footer -->
+  <div class="action-footer">
+    <button 
+      nz-button 
+      nzType="primary"
+      class="submit-button"
+      [disabled]="isSubmitted || !isAllAnswered()"
+      (click)="handleSubmit()">
+      <span *ngIf="!isSubmitted">Kiểm tra</span>
+      <span *ngIf="isSubmitted">Đã kiểm tra</span>
+    </button>
+    <button 
+      *ngIf="isSubmitted"
+      nz-button 
+      nzType="default"
+      class="reset-button"
+      (click)="resetExercise()">
+      Làm lại
+    </button>
+  </div>
+</div>

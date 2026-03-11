@@ -1,8 +1,14 @@
 .auth-layout-container {
-  background-image: linear-gradient(
-    to right, // Tương đương với to-r
-    #d1fae5, // Tương đương với green-100 (giả sử)
-    #c7d2fe, // Tương đương với indigo-200 (giả sử)
-    #f3e8ff // Tương đương với purple-100 (giả sử)
-  );
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  background-image: linear-gradient(to right,
+      #d1fae5,
+      #c7d2fe,
+      #f3e8ff);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

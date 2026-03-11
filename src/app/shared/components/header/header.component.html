@@ -1,54 +1,105 @@
 <nz-header>
-  <div class="app-header d-flex justify-content-between">
-    <div>
-      <div class="logo-header">
-        <img src="/assets/images/Fluentez_text.png" alt="logo-fluentez" />
+  <div class="app-header">
+    <div class="header-content">
+      <!-- Logo Section -->
+      <div class="logo-section">
+        <a routerLink="/" class="logo-link">
+          <img src="/assets/images/Fluentez_text.png" alt="Fluentez" class="logo-img" />
+        </a>
       </div>
-    </div>
-    <div>
-      <nz-input-group [nzPrefix]="prefixTemplateUser">
-        <input
-          class=""
-          type="text"
-          nz-input
-          placeholder="Tìm kiếm khóa học, từ vựng,..."
-        />
-      </nz-input-group>
-      <ng-template #prefixTemplateUser>
-        <span nz-icon nzType="search" nzTheme="outline"></span>
-      </ng-template>
-    </div>
-    <div>
-      <nz-avatar
-        nzIcon="user"
-        [nzSrc]="userLogin?.avatarUrl ?? ''"
-        nz-dropdown
-        [nzDropdownMenu]="menuProfile"
-      >
+
+      <!-- Search Section -->
+      <div class="search-section">
+        <div class="search-wrapper">
+          <span nz-icon nzType="search" nzTheme="outline" class="search-icon"></span>
+          <input
+            type="text"
+            nz-input
+            class="search-input"
+            placeholder="Tìm kiếm khóa học, từ vựng,..."
+          />
+        </div>
+      </div>
+
+      <!-- User Section -->
+      <div class="user-section">
+        <div
+          class="user-menu-trigger"
+          nz-dropdown
+          [nzDropdownMenu]="menuProfile"
+          nzTrigger="click"
+          nzPlacement="bottomRight">
+          <div class="user-avatar-wrapper">
+            <nz-avatar
+              [nzSrc]="userLogin?.avatarUrl"
+              [nzIcon]="!userLogin?.avatarUrl ? 'user' : undefined"
+              nzSize="default"
+              class="user-avatar">
+            </nz-avatar>
+            <span *ngIf="userLogin" class="user-name">{{ userLogin?.email }}</span>
+            <span *ngIf="!userLogin" class="user-name">Đăng nhập</span>
+            <span nz-icon nzType="down" nzTheme="outline" class="dropdown-icon"></span>
+          </div>
+        </div>
+
         <nz-dropdown-menu #menuProfile="nzDropdownMenu">
-          <div class="p-4 shadow bg-white rounded">
+          <div class="user-menu">
             <ng-container *ngIf="userLogin">
-              <div>
-                <nz-avatar [nzSrc]="userLogin?.avatarUrl"></nz-avatar>
-                <span>{{ userLogin?.email }}</span>
+              <div class="user-menu-header">
+                <nz-avatar
+                  [nzSrc]="userLogin?.avatarUrl"
+                  [nzIcon]="!userLogin?.avatarUrl ? 'user' : undefined"
+                  nzSize="large"
+                  class="menu-avatar">
+                </nz-avatar>
+                <div class="user-info">
+                  <div class="user-email">{{ userLogin?.email }}</div>
+                  <div class="user-role" *ngIf="userLogin?.role">{{ userLogin?.role }}</div>
+                </div>
               </div>
               <nz-divider></nz-divider>
-              <button type="button" (click)="onLogOut()" class="btn">
-                Đăng xuất
+              <div class="menu-items">
+                <a class="menu-item" routerLink="/dashboard">
+                  <span nz-icon nzType="dashboard" nzTheme="outline"></span>
+                  <span>Dashboard</span>
+                </a>
+                <a class="menu-item" routerLink="/profile">
+                  <span nz-icon nzType="user" nzTheme="outline"></span>
+                  <span>Hồ sơ</span>
+                </a>
+                <a class="menu-item" routerLink="/settings">
+                  <span nz-icon nzType="setting" nzTheme="outline"></span>
+                  <span>Cài đặt</span>
+                </a>
+              </div>
+              <nz-divider></nz-divider>
+              <button type="button" class="logout-btn" (click)="onLogOut()">
+                <span nz-icon nzType="logout" nzTheme="outline"></span>
+                <span>Đăng xuất</span>
               </button>
             </ng-container>
-            <ng-container *ngIf="!(userLogin)">
-              <div>
-                <nz-avatar nzIcon="user" nzSrc=""></nz-avatar>
-                <span>Anonymous</span>
-                <nz-divider></nz-divider>
-                <a routerLink="login">Đăng nhập</a>
+            <ng-container *ngIf="!userLogin">
+              <div class="user-menu-header">
+                <nz-avatar nzIcon="user" nzSize="large" class="menu-avatar"></nz-avatar>
+                <div class="user-info">
+                  <div class="user-email">Khách</div>
+                </div>
+              </div>
+              <nz-divider></nz-divider>
+              <div class="menu-items">
+                <a class="menu-item" routerLink="/auth/login">
+                  <span nz-icon nzType="login" nzTheme="outline"></span>
+                  <span>Đăng nhập</span>
+                </a>
+                <a class="menu-item" routerLink="/auth/register">
+                  <span nz-icon nzType="user-add" nzTheme="outline"></span>
+                  <span>Đăng ký</span>
+                </a>
               </div>
             </ng-container>
-
           </div>
         </nz-dropdown-menu>
-      </nz-avatar>
+      </div>
     </div>
   </div>
 </nz-header>

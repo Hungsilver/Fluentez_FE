@@ -1,24 +1,335 @@
-.login-btn {
-  border: none;
-  border-radius: 8px;
-  padding: 8px 60px;
-  background-color: transparent;
-  border: 1px solid #e2e8f0;
-  opacity: 1;
-}
-.forgot-pass {
-  &:hover {
-    text-decoration: underline;
+.login-container {
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  animation: fadeInUp 0.4s ease-out;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
-::ng-deep .ant-divider-horizontal.ant-divider-with-text {
-  margin: 8px 0;
+
+.login-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  width: 100%;
 }
 
-::ng-deep .ant-divider-horizontal.ant-divider-with-text {
-  margin: 8px 0;
+.login-header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  .logo-wrapper {
+    margin-bottom: 1.25rem;
+
+    .logo-img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+
+  .login-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a7e48;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .login-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+  }
 }
 
-::ng-deep .ant-row {
-  margin: 8px 0;
+.social-login-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+
+  .social-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  &:hover {
+    border-color: #1a7e48;
+    background: #f6ffed;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(26, 126, 72, 0.12);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &.google-btn:hover {
+    border-color: #db4437;
+    background: #fff5f5;
+    box-shadow: 0 2px 8px rgba(219, 68, 55, 0.12);
+  }
+
+  &.facebook-btn:hover {
+    border-color: #1877f2;
+    background: #f0f4ff;
+    box-shadow: 0 2px 8px rgba(24, 119, 242, 0.12);
+  }
+}
+
+.divider-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+
+  .divider-line {
+    flex: 1;
+    height: 1px;
+    background: #e8e8e8;
+  }
+
+  .divider-text {
+    font-size: 0.875rem;
+    color: #999;
+    font-weight: 500;
+  }
+}
+
+.login-form {
+  .form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #1a7e48;
+      box-shadow: 0 0 0 3px rgba(26, 126, 72, 0.1);
+    }
+
+    &.error {
+      border-color: #ff4d4f;
+    }
+
+    &::placeholder {
+      color: #bfbfbf;
+    }
+  }
+
+  nz-form-item {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  margin-top: -0.25rem;
+
+  .forgot-link {
+    font-size: 0.875rem;
+    color: #1a7e48;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #2ea664;
+      text-decoration: underline;
+    }
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  height: 48px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1a7e48 0%, #2ea664 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(26, 126, 72, 0.3);
+  transition: all 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 126, 72, 0.35);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e8e8e8;
+
+  .footer-text {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .footer-link {
+    font-size: 0.9rem;
+    color: #1a7e48;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #2ea664;
+      text-decoration: underline;
+    }
+  }
+}
+
+.home-link-wrapper {
+  text-align: center;
+  margin-top: 1rem;
+
+  .home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: #1a7e48;
+    }
+
+    span[nz-icon] {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 100%;
+    padding: 0.75rem;
+  }
+
+  .login-card {
+    padding: 1.5rem 1.25rem;
+    border-radius: 12px;
+  }
+
+  .login-header {
+    margin-bottom: 1.25rem;
+
+    .logo-wrapper {
+      margin-bottom: 0.75rem;
+
+      .logo-img {
+        height: 36px;
+      }
+    }
+
+    .login-title {
+      font-size: 1.35rem;
+    }
+
+    .login-subtitle {
+      font-size: 0.8rem;
+    }
+  }
+
+  .social-login-section {
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+
+  .social-btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  .divider-wrapper {
+    margin: 1rem 0;
+  }
+
+  .login-form {
+    nz-form-item {
+      margin-bottom: 0.875rem;
+    }
+  }
+
+  .form-footer {
+    margin-bottom: 1rem;
+  }
+
+  .submit-btn {
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .login-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+  }
+}
+
+// Override Ant Design form styles
+::ng-deep {
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+
+  .ant-form-item-explain-error {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    color: #ff4d4f;
+  }
 }

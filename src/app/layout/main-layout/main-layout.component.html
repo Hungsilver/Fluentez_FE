@@ -38,6 +38,9 @@
           ><span>Courses</span>
         </ng-template>
         <ul>
+          <!-- <li *ngFor="let item of menus" nz-menu-item nzMatchRouter>
+            <a [routerLink]="'/'+item.title+'/'+item.id">{{item.title}}</a>
+          </li> -->
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/grammar">Grammar</a>
           </li>

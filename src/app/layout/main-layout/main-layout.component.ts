@@ -6,6 +6,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { AntCommonModule } from '@shared/module/common/ant-common.module';
 import { HeaderComponent } from "@shared/components/header/header.component";
+import { LayoutService } from '../layout.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -25,10 +26,22 @@ import { HeaderComponent } from "@shared/components/header/header.component";
 })
 export class MainLayoutComponent implements OnInit {
   isCollapsed = false;
-  // userLogin: Observable<string> | undefined;
+  menus : any[] = [];
+
   constructor(
-  ) {}
+    private _layoutService: LayoutService
+  ) {
+  }
 
   ngOnInit() {
+    // this.init();
+  }
+
+  init(){
+    this._layoutService.Courses().subscribe(res=>{
+      if(res && res.data && res.isSuccess){
+        this.menus = res.data;
+      }
+    })
   }
 }

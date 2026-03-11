@@ -1,0 +1,26 @@
+.content img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.content img,
+.content iframe,
+.content video {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+
+.lesson-footer{
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  .btn-previous{
+
+  }
+  .btn-next{
+    
+  }
+}

@@ -1,0 +1,213 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1 class="profile-title">
+      <span nz-icon nzType="user" nzTheme="outline"></span>
+      Hồ sơ cá nhân
+    </h1>
+    <button
+      *ngIf="!isEditMode"
+      nz-button
+      nzType="primary"
+      (click)="toggleEditMode()">
+      <span nz-icon nzType="edit" nzTheme="outline"></span>
+      Chỉnh sửa
+    </button>
+    <div *ngIf="isEditMode" class="edit-actions">
+      <button
+        nz-button
+        nzType="default"
+        (click)="toggleEditMode()">
+        Hủy
+      </button>
+      <button
+        nz-button
+        nzType="primary"
+        [nzLoading]="isLoading"
+        (click)="onSubmit()">
+        Lưu thay đổi
+      </button>
+    </div>
+  </div>
+
+  <div class="profile-content">
+    <!-- Avatar Section -->
+    <div class="profile-section avatar-section">
+      <div class="avatar-wrapper">
+        <nz-avatar
+          [nzSrc]="avatarUrl"
+          [nzIcon]="!avatarUrl ? 'user' : undefined"
+          [nzSize]="120"
+          class="profile-avatar">
+        </nz-avatar>
+        <div *ngIf="isEditMode" class="avatar-upload">
+          <nz-upload
+            [nzCustomRequest]="customRequest"
+            nzName="file"
+            [nzBeforeUpload]="beforeUpload"
+            (nzChange)="handleAvatarChange($event)"
+            [nzShowUploadList]="false">
+            <button nz-button nzType="default">
+              <span nz-icon nzType="camera" nzTheme="outline"></span>
+              Đổi ảnh đại diện
+            </button>
+          </nz-upload>
+        </div>
+      </div>
+    </div>
+
+    <!-- Personal Information -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span nz-icon nzType="idcard" nzTheme="outline"></span>
+          Thông tin cá nhân
+        </h2>
+      </div>
+
+      <form nz-form [formGroup]="profileForm" class="profile-form">
+        <div class="form-row">
+          <nz-form-item class="form-item">
+            <nz-form-label [nzSpan]="24" nzRequired>Tên đăng nhập</nz-form-label>
+            <nz-form-control [nzSpan]="24" [nzErrorTip]="getFieldError('userName')">
+              <input
+                nz-input
+                formControlName="userName"
+                placeholder="Tên đăng nhập"
+                [readonly]="!isEditMode"
+                class="form-input"
+                [class.readonly]="!isEditMode"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label [nzSpan]="24" nzRequired>Họ và tên</nz-form-label>
+            <nz-form-control [nzSpan]="24" [nzErrorTip]="getFieldError('displayName')">
+              <input
+                nz-input
+                formControlName="displayName"
+                placeholder="Họ và tên"
+                [readonly]="!isEditMode"
+                class="form-input"
+                [class.readonly]="!isEditMode"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="form-row">
+          <nz-form-item class="form-item">
+            <nz-form-label [nzSpan]="24" nzRequired>Email</nz-form-label>
+            <nz-form-control [nzSpan]="24" [nzErrorTip]="getFieldError('email')">
+              <input
+                nz-input
+                formControlName="email"
+                type="email"
+                placeholder="Email"
+                [readonly]="!isEditMode"
+                class="form-input"
+                [class.readonly]="!isEditMode"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label [nzSpan]="24">Số điện thoại</nz-form-label>
+            <nz-form-control [nzSpan]="24" [nzErrorTip]="getFieldError('phoneNumber')">
+              <input
+                nz-input
+                formControlName="phoneNumber"
+                placeholder="Số điện thoại"
+                [readonly]="!isEditMode"
+                class="form-input"
+                [class.readonly]="!isEditMode"
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div class="form-row">
+          <nz-form-item class="form-item">
+            <nz-form-label [nzSpan]="24">Ngày sinh</nz-form-label>
+            <nz-form-control [nzSpan]="24">
+              <input
+                nz-input
+                formControlName="dateOfBirth"
+                type="date"
+                [readonly]="!isEditMode"
+                class="form-input"
+                [class.readonly]="!isEditMode"
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label [nzSpan]="24">Giới tính</nz-form-label>
+            <nz-form-control [nzSpan]="24">
+              <nz-select
+                formControlName="gender"
+                [nzDisabled]="!isEditMode"
+                class="form-select">
+                <nz-option nzValue="male" nzLabel="Nam"></nz-option>
+                <nz-option nzValue="female" nzLabel="Nữ"></nz-option>
+                <nz-option nzValue="other" nzLabel="Khác"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="24">Địa chỉ</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <input
+              nz-input
+              formControlName="address"
+              placeholder="Địa chỉ"
+              [readonly]="!isEditMode"
+              class="form-input"
+              [class.readonly]="!isEditMode"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label [nzSpan]="24">Giới thiệu</nz-form-label>
+          <nz-form-control [nzSpan]="24">
+            <textarea
+              nz-input
+              formControlName="bio"
+              placeholder="Giới thiệu về bản thân..."
+              [readonly]="!isEditMode"
+              rows="4"
+              class="form-textarea"
+              [class.readonly]="!isEditMode"
+            ></textarea>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+
+    <!-- Account Info Section -->
+    <div class="profile-section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span nz-icon nzType="safety-certificate" nzTheme="outline"></span>
+          Thông tin tài khoản
+        </h2>
+      </div>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Vai trò:</span>
+          <span class="info-value">{{ userInfo?.roleCodes || 'Chưa có' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Trạng thái:</span>
+          <span class="info-value" [class.locked]="userInfo?.isLockedOut">
+            {{ userInfo?.isLockedOut ? 'Đã khóa' : 'Hoạt động' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

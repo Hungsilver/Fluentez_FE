@@ -10,7 +10,7 @@ export const permissionGuard = (requiredPermissions: string[]) => {
     const user = authService.currentUserValue;
 
     if (!user) {
-      router.navigate(['/auth/login']);
+      router.navigate(['']);
       return false;
     }
 

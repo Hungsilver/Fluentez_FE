@@ -6,12 +6,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { routes } from './auth-routing.module';
 import { CommonBaseModule } from '@shared/module/common/common-base.module';
 import { AntCommonModule } from '@shared/module/common/ant-common.module';
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
     CommonBaseModule,
     AntCommonModule,
+    GoogleSigninButtonModule,
   ],
   declarations: [
     LoginComponent,

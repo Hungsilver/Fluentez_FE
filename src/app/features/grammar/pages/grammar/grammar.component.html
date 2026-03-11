@@ -1,0 +1,59 @@
+<div>
+  <!-- admin -->
+
+  <!-- user -->
+  <div nz-row>
+    <div nz-col nzXs="24" nzSm="24" nzMd="18" nzLg="18" >
+      <app-lesson-detail [lesson]="lesson"></app-lesson-detail>
+    </div>
+    <div class="topics-sidebar" nz-col nzXs="24" nzSm="24" nzMd="6" nzLg="6">
+      <div class="sidebar-header">
+        <h3 class="sidebar-title">
+          <span nz-icon nzType="book" nzTheme="outline"></span>
+          Danh sách bài học
+        </h3>
+        <div class="sidebar-stats" *ngIf="lstUnit">
+          <span class="stats-text">{{ getTotalLessons() }} bài học</span>
+        </div>
+      </div>
+
+      <div class="topics-container">
+        <div 
+          *ngFor="let unit of lstUnit; let i = index" 
+          class="topic-unit"
+          [class.expanded]="expandedUnits[i]">
+          
+          <!-- Unit Header -->
+          <div 
+            class="unit-header"
+            (click)="toggleUnit(i)">
+            <div class="unit-header-content">
+              <span class="unit-icon">
+                <span nz-icon [nzType]="expandedUnits[i] ? 'down' : 'right'" nzTheme="outline"></span>
+              </span>
+              <span class="unit-title">{{ unit.title }}</span>
+              <span class="unit-badge">{{ unit.lessons?.length || 0 }}</span>
+            </div>
+          </div>
+
+          <!-- Lessons List -->
+          <div class="lessons-list" [class.expanded]="expandedUnits[i]">
+            <div
+              *ngFor="let lesson of unit.lessons; let j = index"
+              class="lesson-item"
+              [class.active]="lessonId === lesson.id"
+              (click)="onLessonClick(lesson)">
+              <div class="lesson-content">
+                <span class="lesson-number">{{ j + 1 }}</span>
+                <span class="lesson-title">{{ lesson.title }}</span>
+                <span *ngIf="lessonId === lesson.id" class="lesson-active-indicator">
+                  <span nz-icon nzType="check-circle" nzTheme="fill"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

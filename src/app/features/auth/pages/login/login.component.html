@@ -1,65 +1,96 @@
-<div class="bg-white rounded-1 p-4">
-  <form nz-form [formGroup]="formInput" (ngSubmit)="onSubmit()">
-    <h2 class="text-center mb-4">Welcome back</h2>
-    <div class="d-flex gap-2">
-      <button type="button" class="login-btn">
-        <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAsQAAALEBxi1JjQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAMvSURBVEiJpZZPbBR1FMc/b2a2LFIrWStr1/4xFBaNtF404WAjGkVZLZ4kG9ISPRqMhoPeUKBEExNivWqIMS1Gi8R/SbVEYgnBpMFoQimHlt2YiEvZtgvVXVncmXkeaJud2dndJnyTubzve5/3e/ll3oxQQ/r8Qw9iuEmEJ4FuIHI5b4cNoRQSboSEsyHL/KD51MxENYYEghMPd2C476GaBIxybzpf8gIE7jJlOozV13x6+ryfZfgDmti8B3EuoLonyK/IVyjYGr/hlCZmn9n4fs0JNBHfj3C02mRBE/hh98ut+5rGM/MVE+gL8WQdeAY4Gza4bonYQQmNljFeDl+ZQF/qbMM2J4F7fDWKMoS6g/LD5d/LjeyzGxP/uXxYsDUOcHfIOBP7KbU9aCr0vHmMk9HNTDY+DoSXvDyqr8jozMkqE91utKPzDXU0Hj2dfj3IF71EB0oKMMlZV/i0Nc21hh5U+2R05vNa8FVJL/G2TqGe5+t1g3cMXpKF8lRFdFNhuFZR5OBCk1PMm/Xgi+H2f0Sn+BNoLYtn5BEeqFa04UCmD2GoHnxJvxhAsy+YqlUh0L5KOEBX3Tf1DtVgAPO+YGetChfc1fNlwQIm8d5BTCd5TLr4NbBEzRMYdhuI5Ym7tKqQ8GbrlIUwjrKzPPyHs64fCoENskeiKWCfP77h3cxnqO8wcEZ0inYgDZi2ypUDC1vSH//d0aNo//XeU8eDR/cq+s5fvYp8i3ePuWo4WwSgeNH45Pt/o5venNu6regay6uigMiruRd/PLEK+JfAWo+hfJUdiL0sAJHRna047kUClp3CsAmD871jv5Ub648/3S+lNa+F0se2UbmB82KYj147GE2vGJHvntuN8EVA8rKuAilnrtgtjjaqe3vVW07PtDm7L+45u7I3OxAbhrLvQW7X2AiwH/xXtaIW4AlK2rQMB7AbznVi5W+uwJG3luGeBgC53rGPUJLAYpUmlXJcsxQ7NAssqkoye7jlaLld8Sbndo2N4GiXwhDg1G0g4IZmi7bhbp0baBkJsKsr8s2ONjWNpOBuB+kGvde5WlyLiCOW5DCZMJEjC3t/rvrb8j9aeDScVZZt1AAAAABJRU5ErkJggg=="
-          alt="Google"
-        />
-        <span class="ms-2">Log with Google</span>
-      </button>
-      <button type="button" class="login-btn">
-        <img
-          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAACxAAAAsQHGLUmNAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAsVJREFUSImtlktoE2sUx3/nm0mLqeOjgkqSVqEKiogu3KgrwY268LHwIngREdGV7hJQ8QE+2uhSFwqCVlz46BVF4bq6F0Rx4cbrovhY9JGmKWqsjcY2mZlzF03LGNNOrf533/+c8z/n++Y/840wCWKpfLOHtVUwW0AXA4lKKAPShfoPTSRyP3sm2juRhtQiE0eL8XLZPS7CPsCabAjABzoQL5lrndsV2iCWHNrmCzeAmSHC1SiosnsgPetBkDTBxYLU58O+0DENcQBHhHsLkp8PBcnxHVQm76huWg0j+KubzduWedbQ1xG1+4f8hs6cNg2XdUYlxVdl+9hOBCCeLCY8cTvDJt+4zPrv6p/RWXUWi4P8yUfDzy4/Ka8LUAVXrWUf0g1ZA+CJeypMfOl8q7t9T7SlWnwCOBG8UwAmlso3A3vCKi7sqO8WoSHIKXwqedo7WNRIdb4Ke+PJYsIe9XmoFVkRM/OD69N/jzy99G9pPTAXaKpRYnnibTWisjlMHKDOlvHpfeV9RXxyqG42CEum0kACjvOVkanUILQYYOGUkqeHuCxMDX2B7x/eGPrOzcwbkcYwlbXnv2a6PvqJGqGCAQZ+ccpvPXk/VisgkDPA619RHy7T62vtt1/hja3oY0E21Uq49tx9Fa04/I81kVUCcyqFg7delF8CvMp69RM1V/SxxFL5Zh/7HfDDyxJE71knY5vR+8D1yTQdKdQ68yBKltotJtvW2APcDEn+aYjS3peOZgyAwT0BfPqN+nmDPfotAsi2NfYgcgDQ3yCuorK/Lx3NjDcAyLU6d0TkIKNX4LTFUT3Un3b+GiO+s1d/q3MFZBfTO648Kjtz6dkXg+QP/s21Obdt214JtAOlKQiXEK67aq3MpZ271cGafxVjSBwtxj2vvFNVNnSfdmJ1NssBSi6di44VsiL6T9m3b31IN2Qn0vgfVQr3Gl3992kAAAAASUVORK5CYII="
-          alt="Facebook"
-        />
-        <span class="ms-2">Log with Facebook</span>
-      </button>
+<div class="login-container">
+  <div class="login-card">
+    <!-- Header -->
+    <div class="login-header">
+      <div class="logo-wrapper">
+        <img src="/assets/images/Fluentez_text.png" alt="Fluentez" class="logo-img" />
+      </div>
+      <h1 class="login-title">Chào mừng trở lại!</h1>
+      <p class="login-subtitle">Đăng nhập để tiếp tục học tập</p>
     </div>
-    <nz-divider nzText="or">or</nz-divider>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="24" nzRequired>Email</nz-form-label>
-      <nz-form-control [nzSpan]="24" nzErrorTip="Please input your email!">
-        <input
-          nz-input
-          formControlName="email"
-          placeholder="Enter your email"
-          type="email"
-        />
-      </nz-form-control>
-    </nz-form-item>
 
-    <nz-form-item>
-      <nz-form-label [nzSpan]="24" nzRequired>Password</nz-form-label>
-      <nz-form-control [nzSpan]="24" nzErrorTip="Please input your password!">
-        <input
-          nz-input
-          formControlName="password"
-          placeholder="Enter your password"
-          type="password"
+    <!-- Social Login Buttons -->
+    <div class="social-login-section">
+      <asl-google-signin-button
+        type="standard"
+        size="large"
+        text="signin_with"
+        shape="rectangular"
+        theme="outline"
+        [width]="280"
+      ></asl-google-signin-button>
+      <button type="button" class="social-btn facebook-btn" (click)="loginWithFacebook()">
+        <img
+          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAACxAAAAsQHGLUmNAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAsVJREFUSImtlktoE2sUx3/nm0mLqeOjgkqSVqEKiogu3KgrwY268LHwIngREdGV7hJQ8QE+2uhSFwqCVlz46BVF4bq6F0Rx4cbrovhY9JGmKWqsjcY2mZmzF03LGNNOrf533/+c8z/n++Y/840wCWKpfLOHtVUwW0AXA4lKKAPShfoPTSRyP3sm2juRhtQiE0eL8XLZPS7CPsCabAjABzoQL5lrndsV2iCWHNrmCzeAmSHC1SiosnsgPetBkDTBxYLU58O+0DENcQBHhHsLkp8PBcnxHVQm76huWg0j+KubzduWedbQ1xG1+4f8hs6cNg2XdUYlxVdl+9hOBCCeLCY8cTvDJt+4zPrv6p/RWXUWi4P8yUfDzy4/Ka8LUAVXrWUf0g1ZA+CJeypMfOl8q7t9T7SlWnwCOBG8UwAmlso3A3vCKi7sqO8WoSHIKXwqedo7WNRIdb4Ke+PJYsIe9XmoFVkRM/OD69N/jzy99G9pPTAXaKpRYnnibTWisjlMHKDOlvHpfeV9RXxyqG42CEum0kACjvOVkanUILQYYOGUkqeHuCxMDX2B7x/eGPrOzcwbkcYwlbXnv2a6PvqJGqGCAQZ+ccpvPXk/VisgkDPA619RHy7T62vtt1/hja3oY0E21Uq49tx9Fa04/I81kVUCcyqFg7delF8CvMp69RM1V/SxxFL5Zh/7HfDDyxJE71knY5vR+8D1yTQdKdQ68yBKltotJtvW2APcDEn+aYjS3peOZgyAwT0BfPqN+nmDPfotAsi2NfYgcgDQ3yCuorK/Lx3NjDcAyLU6d0TkIKNX4LTFUT3Un3b+GiO+s1d/q3MFZBfTO648Kjtz6dkXg+QP/s21Obdt214JtAOlKQiXEK67aq3MpZ271cGafxVjSBwtxj2vvFNVNnSfdmJ1NssBSi6di44VsiL6T9m3b31IN2Qn0vgfVQr3Gl3992kAAAAASUVORK5CYII="
+          alt="Facebook"
+          class="social-icon"
         />
-      </nz-form-control>
-    </nz-form-item>
-    <div>
-      <a class="forgot-pass text-primary" routerLink="/auth/forgot-password">Forgot pasword</a>
+        <span>Đăng nhập với Facebook</span>
+      </button>
     </div>
-    
-    <button
-      nz-button
-      nzType="primary"
-      class="w-100 my-2"
-      [disabled]="!formInput.valid"
-      type="submit"
-    >
-      Login to your account
-    </button>
-    <div>
-      <span>Don't have an account yet ? </span> 
-      <a class="forgot-pass text-primary" routerLink="/auth/register">Sign up here</a>
+
+    <!-- Divider -->
+    <div class="divider-wrapper">
+      <div class="divider-line"></div>
+      <span class="divider-text">hoặc</span>
+      <div class="divider-line"></div>
     </div>
-    <div>
-      <a class="forgot-pass text-primary" routerLink="/">Trang chủ</a>
+
+    <!-- Login Form -->
+    <form nz-form [formGroup]="formInput" (ngSubmit)="onSubmit()" class="login-form">
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24" nzErrorTip="Vui lòng nhập email hợp lệ!">
+          <input
+            nz-input
+            formControlName="email"
+            placeholder="Email của bạn"
+            type="email"
+            class="form-input"
+            [class.error]="formInput.get('email')?.invalid && formInput.get('email')?.touched"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-control [nzSpan]="24" nzErrorTip="Vui lòng nhập mật khẩu!">
+          <input
+            nz-input
+            formControlName="password"
+            placeholder="Mật khẩu"
+            type="password"
+            class="form-input"
+            [class.error]="formInput.get('password')?.invalid && formInput.get('password')?.touched"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="form-footer">
+        <a class="forgot-link" routerLink="/auth/forgot-password">Quên mật khẩu?</a>
+      </div>
+      
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        class="submit-btn"
+        [disabled]="!formInput.valid || isLoading"
+        [nzLoading]="isLoading"
+        type="submit"
+      >
+        Đăng nhập
+      </button>
+    </form>
+
+    <!-- Footer Links -->
+    <div class="login-footer">
+      <span class="footer-text">Chưa có tài khoản? </span>
+      <a class="footer-link" routerLink="/auth/register">Đăng ký ngay</a>
     </div>
-  </form>
+    <div class="home-link-wrapper">
+      <a class="home-link" routerLink="/">
+        <span nz-icon nzType="home" nzTheme="outline"></span>
+        Về trang chủ
+      </a>
+    </div>
+  </div>
 </div>

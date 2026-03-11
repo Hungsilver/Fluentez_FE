@@ -1,0 +1,51 @@
+<!-- lesson-detail.component.html -->
+<div class="lesson-container">
+  <!-- Header -->
+  <div class="lesson-header">
+    <h1>{{ lesson?.title }}</h1>
+    <p class="lesson-description">{{ lesson?.description }}</p>
+  </div>
+
+  <!-- Dynamic Content Rendering -->
+  <div class="lesson-content">
+    <ng-container *ngIf="lesson?.type === lessonType.LyThuyet">
+        <div class="content" [innerHTML]="lesson?.html"></div>
+    </ng-container>
+
+    <ng-container *ngIf="lesson?.type === lessonType.ThucHanh">
+      <!-- Fill in Blank Exercise -->
+      <app-fill-in-blank-exercise
+        *ngIf="lesson?.questionType === questionType.FillInBlank"
+        [data]="lesson.questions"
+        (onSubmit)="onExerciseSubmit($event)"
+      >
+      </app-fill-in-blank-exercise>
+      <!-- Multiple Choice -->
+      <app-multiple-choice-exercise
+        *ngIf="lesson?.questionType === questionType.MultipleChoice"
+        [data]="lesson.questions"
+        (onSubmit)="onExerciseSubmit($event)"
+      >
+      </app-multiple-choice-exercise>
+
+      <!-- Listening Exercise -->
+      <!-- <app-listening-exercise 
+        *ngIf="content.type === ContentType.Listening"
+        [data]="content.data"
+        (onSubmit)="onExerciseSubmit($event)">
+      </app-listening-exercise> -->
+
+      <!-- </ng-container> -->
+
+      <!-- Navigation -->
+      <div nz-flex nzJustify="center" class="lesson-footer">
+        <button nz-button nzType="primary" class="btn-previous" (click)="goToPreviousLesson()">
+          ← Bài trước
+        </button>
+        <button nz-button nzType="primary" class="btn-next" (click)="goToNextLesson()">
+          Bài tiếp theo →
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>
